@@ -26,8 +26,14 @@ language regenerates — no Figma, no per-locale hand editing.
 ## Install
 
 ```bash
-pipx install git+https://github.com/DmitryKhryukin/appshots
-# or run straight from a checkout:
+pip install appshots
+# or, to keep it in an isolated CLI environment:
+pipx install appshots
+```
+
+Or run straight from a checkout:
+
+```bash
 pip install Pillow && python appshots.py --config CONFIG.json
 ```
 
