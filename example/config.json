@@ -1,0 +1,46 @@
+{
+  "devices": ["iphone-6.9"],
+  "output_dir": "./output",
+  "font": {
+    "path": "./fonts/Neucha-Regular.ttf",
+    "size": 110,
+    "color": "#FFFFFFFF",
+    "shadow": { "color": "#00000080", "offset": [0, 6], "blur": 10 }
+  },
+  "layout": {
+    "screenshot_scale": 0.72,
+    "screenshot_max_height": 0.74,
+    "screenshot_offset_y": 0.06,
+    "screenshot_frame": {
+      "corner_radius": 90,
+      "border_width": 22,
+      "border_color": "#0a0a0a",
+      "inner_highlight_color": "#3a3a3a",
+      "inner_highlight_width": 2
+    },
+    "screenshot_shadow": { "color": "#00000090", "offset": [0, 30], "blur": 60 },
+    "caption_position_y": 0.08,
+    "background_resample": "lanczos",
+    "screenshot_resample": "lanczos"
+  },
+  "screenshots": [
+    {
+      "id": "feed",
+      "screenshot": "./input/feed.png",
+      "background": "./backgrounds/feed.png",
+      "caption": {
+        "en": "All your lorem in one place",
+        "ru": "Весь ваш lorem под рукой"
+      }
+    },
+    {
+      "id": "stats",
+      "screenshot": "./input/stats.png",
+      "background": "./backgrounds/stats.png",
+      "caption": {
+        "en": "Watch your ipsum grow",
+        "ru": "Следите за ростом ipsum"
+      }
+    }
+  ]
+}
