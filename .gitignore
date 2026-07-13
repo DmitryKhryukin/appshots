@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# macOS
+.DS_Store
+
+# Rendered screenshots (per-app configs live in the app repos anyway)
+output/
+
+# Packaging
+dist/
+*.egg-info/
