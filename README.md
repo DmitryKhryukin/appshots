@@ -1,5 +1,7 @@
 # appshots
 
+[![CI](https://github.com/DmitryKhryukin/appshots/actions/workflows/ci.yml/badge.svg)](https://github.com/DmitryKhryukin/appshots/actions/workflows/ci.yml)
+
 Compose App Store marketing screenshots from raw captures, background images,
 and localized captions — declaratively, from one `config.json`.
 
