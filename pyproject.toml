@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "appshots"
+version = "0.1.0"
+description = "Compose App Store marketing screenshots from raw captures, backgrounds, and localized captions"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+dependencies = ["Pillow>=10.0"]
+keywords = ["app-store", "screenshots", "marketing", "ios", "fastlane", "localization"]
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Topic :: Multimedia :: Graphics",
+]
+
+[project.scripts]
+appshots = "appshots:main"
+
+[tool.setuptools]
+py-modules = ["appshots"]
