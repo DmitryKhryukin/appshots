@@ -5,6 +5,11 @@
 Compose App Store marketing screenshots from raw captures, background images,
 and localized captions — declaratively, from one `config.json`.
 
+*Automate localized App Store / Play Store marketing screenshots as code — a
+lightweight `fastlane frameit` alternative that also handles per-locale
+captions, auto-shrinking text, and glyph/locale safety. Agents: see
+[`AGENTS.md`](AGENTS.md).*
+
 | Raw capture | Composed screenshot |
 |:---:|:---:|
 | ![before](docs/img/before.png) | ![after](docs/img/after.png) |
