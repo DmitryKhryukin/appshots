@@ -11,7 +11,7 @@ license = { file = "LICENSE" }
 requires-python = ">=3.9"
 authors = [{ name = "Dmitry Khryukin" }]
 dependencies = ["Pillow>=10.0"]
-keywords = ["app-store", "screenshots", "marketing", "ios", "fastlane", "localization"]
+keywords = ["app-store", "screenshots", "marketing", "ios", "fastlane", "frameit", "play-store", "localization"]
 classifiers = [
     "Environment :: Console",
     "Intended Audience :: Developers",
