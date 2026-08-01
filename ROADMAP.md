@@ -20,6 +20,20 @@ app's real localization.
 This is the feature that turns appshots from a standalone tool into something
 that drops into an existing iOS localization pipeline.
 
+## Per-locale screenshot SOURCES
+
+`caption` supports a locale dict, but `screenshot` only supports a per-device
+dict — so a localized app (UI captured per language) can't be expressed in one
+config. Real pain hit on iq-art (2026-08, 5 locales): the workaround was a
+script generating one config per locale (`config-<loc>.json`, plain-string
+captions, `output_dir` per locale) and running appshots five times — see
+`iq-art/screenshots/make_configs.py`.
+
+- Allow `"screenshot": { "en": "./input/en/feed.png", "ru": ... }` (locale dict),
+  composing with the existing per-device dict form (locale → device → path).
+- Locale set must match the caption dict's union; missing source fails loudly.
+- Output already splits per-locale when captions are dicts — no change there.
+
 ## Multi-line captions
 
 Captions are forced to a single line — a `\n` is rejected, because Pillow's
