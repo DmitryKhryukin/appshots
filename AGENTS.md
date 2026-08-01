@@ -85,6 +85,21 @@ input; do not suppress the check:
 A missing background file is the one soft failure: it falls back to a solid
 color so layout work can continue.
 
+## tools/letterbox.py — IAP review screenshots
+
+Separate from composition: App Store Connect's **in-app purchase review
+screenshot** field rejects modern device sizes (1320×2868 → "The dimensions
+of one or more screenshots are wrong") while the app's screenshot gallery
+accepts them. `python3 tools/letterbox.py raw.png` downscales a raw capture
+without distortion into legacy sizes that pass (1242×2208 + 640×920 by
+default), padding with a color sampled from the image edge so the seam is
+invisible on solid-background apps. No captions, no frames — ASC review
+fields want plain app screens.
+
+Marketing screenshots have their own size trap: the version page shows either
+a 6.9" slot (1320×2868) or a 6.5" slot (1284×2778) and rejects the other
+size — render `"devices": ["iphone-6.9", "iphone-6.5"]` so both are ready.
+
 ## Verify a change
 
 ```bash
