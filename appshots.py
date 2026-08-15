@@ -270,6 +270,21 @@ def font_path_for_locale(font_cfg, locale):
     return p
 
 
+def split_font_ref(ref):
+    """A font reference may name a face inside a .ttc collection: 'Songti.ttc#2'.
+
+    Collections put a different face at index 0 than the name suggests (e.g.
+    macOS Songti.ttc opens as Songti SC while the Traditional faces sit deeper),
+    so without an index the glyph-coverage check rejects a font that actually
+    has the glyphs — just not in face 0.
+    """
+    s = str(ref)
+    stem, sep, idx = s.rpartition("#")
+    if sep and idx.isdigit():
+        return stem, int(idx)
+    return s, 0
+
+
 def check_glyph_coverage(font, text, path):
     """Fail loudly when the font lacks glyphs for the caption.
 
@@ -297,14 +312,15 @@ def fit_caption_font(font_cfg, base, text, max_width, locale=None):
     if "\n" in text:
         raise ValueError(f"Captions must be single-line (Pillow can't center "
                          f"multiline text): {text!r}")
-    path = str(resolve(base, font_path_for_locale(font_cfg, locale)))
+    ref, face_index = split_font_ref(font_path_for_locale(font_cfg, locale))
+    path = str(resolve(base, ref))
     size = font_cfg["size"]
     stroke_pad = (font_cfg.get("stroke") or {}).get("width", 0) * 2
-    font = ImageFont.truetype(path, size)
+    font = ImageFont.truetype(path, size, index=face_index)
     check_glyph_coverage(font, text, path)
     while size > 12 and font.getlength(text) + stroke_pad > max_width:
         size = max(12, int(size * 0.95))
-        font = ImageFont.truetype(path, size)
+        font = ImageFont.truetype(path, size, index=face_index)
     return font
 
 

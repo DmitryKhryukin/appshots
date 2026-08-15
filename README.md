@@ -183,6 +183,23 @@ as a dict with a `default` fallback:
 }
 ```
 
+A font reference may name a face inside a `.ttc` collection with a `#index`
+suffix — collections often put a different face at index 0 than the filename
+suggests (macOS `Songti.ttc` opens as Songti SC; the Traditional faces sit at
+other indices):
+
+```json
+{
+  "font": {
+    "path": {
+      "default": "./fonts/PTSerif-Bold.ttf",
+      "zh-Hant": "/System/Library/Fonts/Songti.ttc#2"
+    },
+    "size": 96
+  }
+}
+```
+
 ### Notes
 
 - All paths in `config.json` are relative to the config file's directory (or absolute).

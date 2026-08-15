@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "appshots"
-version = "0.1.0"
+version = "0.2.0"
 description = "Compose App Store marketing screenshots from raw captures, backgrounds, and localized captions"
 readme = "README.md"
 license = { file = "LICENSE" }

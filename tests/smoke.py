@@ -76,7 +76,23 @@ def main():
         assert proc.returncode == 1, "render with missing glyphs should exit 1"
         assert "has no glyphs" in proc.stdout, f"expected glyph error, got:\n{proc.stdout}"
 
-        print("smoke OK — localized set, landscape preset, glyph check verified")
+        # 4. '#index' selects a face inside a .ttc collection
+        sys.path.insert(0, str(ROOT))
+        import appshots as mod
+        assert mod.split_font_ref("f.ttc#2") == ("f.ttc", 2)
+        assert mod.split_font_ref("f.ttf") == ("f.ttf", 0)
+        assert mod.split_font_ref("dir#1/f.ttf") == ("dir#1/f.ttf", 0)
+        songti = "/System/Library/Fonts/Songti.ttc"
+        if Path(songti).exists():
+            # macOS-only render check: face 0 (Songti SC) lacks these Traditional
+            # glyphs, so a successful render proves face 2 was actually loaded
+            cfg = load_example_config(tmp, output_dir=str(tmp / "ttc"))
+            cfg["font"]["path"] = f"{songti}#2"
+            cfg["screenshots"] = [dict(cfg["screenshots"][0], caption="個時畫")]
+            proc = run(tmp, cfg, "ttc")
+            assert proc.returncode == 0, f"ttc-index render failed:\n{proc.stdout}{proc.stderr}"
+
+        print("smoke OK — localized set, landscape preset, glyph check, ttc face index verified")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
