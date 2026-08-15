@@ -12,3 +12,6 @@ output/
 # Packaging
 dist/
 *.egg-info/
+
+# Packaging build tree (a stale build/lib silently ships old code into the wheel)
+build/
