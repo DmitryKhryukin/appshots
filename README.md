@@ -142,6 +142,24 @@ When iPhone and iPad screenshots differ, pass a dict keyed by device id:
 }
 ```
 
+### Per-screenshot layout overrides
+
+Any `layout` key can be overridden for one screenshot by giving that entry its
+own `layout` dict — it merges shallowly over the global one. Typical use: move
+the caption to the bottom on the one frame whose top band is busy:
+
+```json
+{
+  "id": "maze",
+  "screenshot": "./input/maze.png",
+  "caption": "Outrun the Minotaur!",
+  "layout": { "caption_position_y": 0.90, "caption_font_size": 110 }
+}
+```
+
+`caption_font_size` (layout, optional) overrides `font.size` — handy for one
+frame whose caption must squeeze under a UI element.
+
 ### Localized captions
 
 A caption can be a plain string (same text for every locale) or a dict keyed

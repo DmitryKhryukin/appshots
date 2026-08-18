@@ -328,7 +328,9 @@ def compose_one(config, device, spec, base, locale=None):
     w, h = device["width"], device["height"]
     canvas = Image.new("RGBA", (w, h), (0, 0, 0, 255))
 
-    layout = config.get("layout", {})
+    # Per-screenshot layout overrides (e.g. a caption moved to the bottom on the
+    # one frame whose top band is busy) merge shallowly over the global layout.
+    layout = {**config.get("layout", {}), **spec.get("layout", {})}
     bg_resample = RESAMPLE[layout.get("background_resample", "nearest")]
     shot_resample = RESAMPLE[layout.get("screenshot_resample", "nearest")]
 
@@ -393,6 +395,8 @@ def compose_one(config, device, spec, base, locale=None):
     caption = caption_for_locale(spec, locale)
     if caption:
         font_cfg = config["font"]
+        if "caption_font_size" in layout:   # per-screenshot size (layout override)
+            font_cfg = {**font_cfg, "size": layout["caption_font_size"]}
         max_width = int(w * layout.get("caption_max_width", 0.92))
         font = fit_caption_font(font_cfg, base, caption, max_width, locale)
         cy = int(h * layout.get("caption_position_y", 0.10))
